@@ -1,17 +1,23 @@
 {
     "uuid": "Cinnamenu@json",
-    "name": "Cinnamenu",
-    "description": "A flexible menu with grid or list layout options, file browser and emoji search.",
+    "name": "Cinnamenu-metro",
+    "description": "The classic cinnamenu but with app groups",
     "max-instances": -1,
     "version": "5.6.0",
     "multiversion": true,
-    "website": "https://github.com/linuxmint/cinnamon-spices-applets",
+    "website": "https://github.com/cpxcristian/Cinnamenu-metro",
     "cinnamon-version": [
         "4.0",
         "4.2",
         "4.4",
         "4.6",
-        "4.8"
+        "4.8",
+        "5.0",
+        "5.2",
+        "5.4",
+        "5.6",
+        "5.8",
+        "6.0"
     ],
-    "author": "fredcw"
+    "author": "cpxcristian (Original Author: fredcw)"
 }

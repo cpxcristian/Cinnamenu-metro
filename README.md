@@ -1,40 +1,35 @@
-![screenshot](screenshot.png)
+# Cinnamenu-metro
 
-Cinnamenu
-========
-_Version: 5.6.0 (updated 25/2/26)_ (highlight file with Open containing folder)
+## Credits
+This applet is a fork of the classic Cinnamenu applet [Cinnamenu](https://github.com/fredcw/Cinnamenu).
 
-Cinnamenu is a full featured alternative to the standard Cinnamon menu with grid layout and customisation options.
-
-
-### To install or update:
-```
-curl -sSLf https://github.com/fredcw/Cinnamenu/raw/main/install.sh | bash
-```
-### Features
-
- * Fuzzy searching for app names.
- * Filesystem browser and home directory file search.
- * Emoji browser & search.
- * Customisation options:
-   * Resizable.
-   * View apps in a list or grid.
-   * Options on where to show session and favorite app buttons.
-   * Change icon sizes.
- * Browser bookmarks and history search
- * Web search suggestions & Wikipedia search.
- * Built in calculator with calculator history. This is evaluated as a javascript expression so all javascript operators and Math functions are valid, including constants: E, PI and functions (trig) sin, asin, sinh, asinh, cos, tan, etc. and cbrt, exp, floor, log, log10, pow, random, round, sqrt, etc. All angles are in radians. (see [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators) for list of operators and [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math) for list of constants and functions)
+## License
+This applet is licensed under the terms of the [GNU General Public License](https://www.gnu.org/licenses/gpl.html).
 
 
-----
+## Features
+- Metro style applet
+- App groups
 
-#### Key navigation (optional)
- * `Return/Enter` — Activate currently highlighted item (same as left clicking on item.)
- * `Ctrl-Enter/Menu key` — Open/close context menu of currently highlighted item.
- * `Arrow keys/pg up/pg down` — navigate between items.
- * `Tab/Shift-Tab` — navigate between apps ⇨ categories ⇨ sidebar.
- * `Esc` — Close menu or context menu.
+### Preview
+![Menu](docs/menu.png)
 
-#### Expert features (optional)
- * `Shift-Enter` — Run currently highlighted application as root user.
- * `Ctrl-d` — Open .desktop file of currently highlighted app in default text editor (opens file in user mode.)
+
+## How to install
+
+1. Extract the folder `Cinnamenu@json` to `~/.local/share/cinnamon/applets/`.
+2. Restart cinnamon.
+3. Add the applet to the panel.
+
+![Add Applet](docs/add-applet.png)
+
+4. To create your own groups you'll need to edit your `.desktop` files and add the `CategoryDisplay` field to the `[Desktop Entry]` section. The value of the `CategoryDisplay` field will be the name of the group.
+It was done this way to avoid user to create/manage a json file everytime there's a new app install or system update, you only need to do it once per app.
+
+![Edit Launcher](docs/edit-launcher.png)
+
+Note: To avoid the lost of your groups, you can copy your modified `.desktop` files to `~/.local/share/applications/` so the SO always use them instead of the system wide ones.
+
+## Limitations
+- By the moment the shortcut "ctrl+d" to open `.desktop` file does not work inside groups, only if you use the search bar to find the app and then press "ctrl+d".
+- Groups are fixed to a maximum of 2 groups per row.

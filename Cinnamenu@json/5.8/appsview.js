@@ -477,6 +477,7 @@ class AppsView {
     constructor(applet) {
         this.applet = applet;
         this.buttonStore = [];
+        this.categoryList = {};
         this.appsViewSignals = new SignalManager(null);
 
         this.applicationsListBox = new St.BoxLayout({ vertical: true });
@@ -541,6 +542,8 @@ class AppsView {
         this.applicationsListBox.hide();//hide while populating for performance.
         //this.applicationsGridBox.hide();//gridBox is slower when hidden!
         this.clearAppsView();
+        this.buttonStore = [];
+        this.categoryList = {};
         this.applicationsScrollBox.vscroll.adjustment.set_value(0);//scroll to top
 
         if (headerText) {
@@ -583,28 +586,129 @@ class AppsView {
             this.subheadings.push(subheading);
         }
 
+        if (this.applet && this.applet.searchActive) {
+            appList.forEach(app => {
+                let appButton = this.buttonStore.find(button => button.app === app);
+
+                if (!appButton) {
+                    appButton = new AppButton(this.applet, app);
+                    this.buttonStore.push(appButton);
+                }
+                if (this.applet.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
+                    this.applicationsListBox.add_actor(appButton.actor);
+                } else {
+                    appButton.setGridButtonWidth();// In case menu has been resized.
+                    gridLayout.attach(appButton.actor, this.column, this.rownum, 1, 1);
+                    appButton.actor.layout_column = this.column;//used for key navigation
+                    this.column++;
+
+                    if (this.column > this.getGridValues().columns - 1) {
+                        this.column = 0;
+                        this.rownum++;
+                    }
+                }
+
+                appButton._setButtonStyleNormal();
+            });
+        } else {
+            this.appsByCategory(appList);
+        }
+    }
+
+    // MARK: appsByCategory
+    appsByCategory(appList) {
+        let tempCategoryList = {};
         appList.forEach(app => {
-            let appButton = this.buttonStore.find(button => button.app === app);
+            let categoryName = app.get_app_info().get_string("CategoryDisplay") || "General";
 
-            if (!appButton) {
-                appButton = new AppButton(this.applet, app);
-                this.buttonStore.push(appButton);
+            if (!tempCategoryList[categoryName]) {
+                tempCategoryList[categoryName] = [];
             }
-            if (this.applet.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
-                this.applicationsListBox.add_actor(appButton.actor);
-            } else {
-                appButton.setGridButtonWidth();// In case menu has been resized.
-                gridLayout.attach(appButton.actor, this.column, this.rownum, 1, 1);
-                appButton.actor.layout_column = this.column;//used for key navigation
-                this.column++;
+            tempCategoryList[categoryName].push(app);
+        });
 
-                if (this.column > this.getGridValues().columns - 1) {
-                    this.column = 0;
-                    this.rownum++;
+        // Totally subjective categories order. If your group is not in the list it will be added at the end (before "general").
+        let order = { "web": 1, "work": 2, "office": 3, "remote": 4, "tools": 5, "general": 999 };
+        let startCount = 100;
+        this.categoryList = Object.fromEntries(
+            Object.entries(tempCategoryList).sort(
+                ([keyA], [keyB]) => (order[keyA.toLowerCase()] || startCount++) - (order[keyB.toLowerCase()] || startCount++)
+            )
+        );
+
+
+        if (this.applet.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
+            this.applicationsListBox.get_children().forEach(child => child.destroy());
+        } else {
+            this.applicationsGridLayout.get_children().forEach(child => child.destroy());
+        }
+        this.globalGroupRow = 0;
+        let groupCol = 0;
+
+        Object.keys(this.categoryList).forEach(group => {
+            let categoryLayout = new St.BoxLayout({ vertical: true, style_class: 'menu-group' });
+
+            categoryLayout.set_x_expand(true);
+
+            let title = new St.Label({ text: group, style_class: 'menu-title' });
+            categoryLayout.add_actor(title);
+
+            let subGrid = new St.BoxLayout({ style_class: 'menu-subgrid' });
+            let gridLayoutManager = new Clutter.GridLayout();
+            subGrid.set_layout_manager(gridLayoutManager);
+
+            let localCol = 0;
+            let localRow = 0;
+
+            const maxColumns = Math.max(2, Math.floor(this.getGridValues().columns / 2));
+
+            this.categoryList[group].forEach(app => {
+                let appButton = this.buttonStore.find(button => button.app === app);
+
+                if (!appButton) {
+                    appButton = new AppButton(this.applet, app);
+                    this.buttonStore.push(appButton);
+                } else {
+                    let parent = appButton.actor.get_parent();
+                    if (parent) {
+                        parent.remove_child(appButton.actor);
+                    }
+                }
+
+                if (this.applet.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
+                    categoryLayout.add_actor(appButton.actor);
+                } else {
+                    appButton.setGridButtonWidth();// In case menu has been resized.
+                    subGrid.layout_manager.attach(appButton.actor, localCol, localRow, 1, 1);
+                    appButton.actor.layout_column = localCol;
+                    localCol++;
+                    if (localCol >= maxColumns) {
+                        localCol = 0;
+                        localRow++;
+                    }
+                }
+
+                appButton._setButtonStyleNormal();
+            });
+
+            if (this.applet.settings.applicationsViewMode !== ApplicationsViewMode.LIST) {
+                categoryLayout.add_actor(subGrid);
+            }
+
+            if (this.applet.settings.applicationsViewMode === ApplicationsViewMode.LIST) {
+                this.applicationsListBox.add_actor(categoryLayout);
+            } else {
+                if (typeof this.globalGroupRow === 'undefined') this.globalGroupRow = 0;
+
+                this.applicationsGridLayout.layout_manager.attach(categoryLayout, groupCol, this.globalGroupRow, 1, 1);
+
+                if (groupCol === 0) {
+                    groupCol = 1;
+                } else {
+                    groupCol = 0;
+                    this.globalGroupRow++;
                 }
             }
-
-            appButton._setButtonStyleNormal();
         });
     }
 
@@ -675,7 +779,7 @@ class AppsView {
 
     getGridValues() {
         const gridBoxUsableWidth = this.applet.display.currentGridBoxUsableWidth;
-        const minColumnWidth = Math.max(140, this.applet.settings.appsGridIconSize * 1.2);
+        const minColumnWidth = Math.max(120, this.applet.settings.appsGridIconSize * 1.2);
         const columns = Math.floor(gridBoxUsableWidth / (minColumnWidth * global.ui_scale));
         const columnWidth = Math.floor(gridBoxUsableWidth / columns);
         

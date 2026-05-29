@@ -532,13 +532,16 @@ class AppsView {
     // MARK: appsByCategory
     appsByCategory(appList) {
         let tempCategoryList = {};
+        let appCount = 100;
         appList.forEach(app => {
-            let categoryName = app.get_app_info().get_string("CategoryDisplay") || "General";
+            appCount++;
+            let categoryName = app.get_app_info().get_string("CinnamenuCategory") || "General";
+            let priority = app.get_app_info().get_string("CinnamenuPriority") || appCount;
 
             if (!tempCategoryList[categoryName]) {
                 tempCategoryList[categoryName] = [];
             }
-            tempCategoryList[categoryName].push(app);
+            tempCategoryList[categoryName][priority] = app;
         });
 
         let order = { "web": 1, "work": 2, "office": 3, "remote": 4, "tools": 5, "general": 999 };

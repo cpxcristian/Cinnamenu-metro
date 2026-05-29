@@ -24,11 +24,13 @@
 Instead of forcing you to manually manage a complex JSON file every time a new app is installed, this applet reads your groups natively from your application launchers.
 
 1. **Edit the Launcher:**  
-   Open your desired `.desktop` file and add the `CategoryDisplay` field inside the `[Desktop Entry]` section. The value will be the exact name of the group:
+   Open your desired `.desktop` file and add the `CinnamenuCategory` field inside the `[Desktop Entry]` section. The value will be the exact name of the group.
+   Additionally you can add `CinnamenuPriority` field to specify the order of the apps in the group. The lower the number, the higher the priority. If not specified, the app will be placed at the end of the group.:
    ```ini
    [Desktop Entry]
    Name=Antigravity
-   CategoryDisplay=Work
+   CinnamenuCategory=Work
+   CinnamenuPriority=1
    ```
 
 2. **💡 Pro Tip (Avoid losing your groups):**  
@@ -47,5 +49,5 @@ Instead of forcing you to manually manage a complex JSON file every time a new a
 
 ## ⚖️ Credits & License
 
-* **Credits:** This applet is a modified fork of the classic [Cinnamenu](https://github.com/fredcw/Cinnamenu) applet by **fredcw**.
+* **Credits:** This applet is a modified version of the classic [Cinnamenu](https://github.com/fredcw/Cinnamenu) applet by **fredcw**.
 * **License:** This project is licensed under the terms of the **GNU General Public License v3.0 (GPL-3.0)**.

@@ -1,0 +1,23 @@
+{
+    "uuid": "Cinnamenu@json",
+    "name": "Cinnamenu-metro",
+    "description": "The classic cinnamenu but with app groups",
+    "max-instances": -1,
+    "version": "5.6.0",
+    "multiversion": true,
+    "website": "https://github.com/cpxcristian/Cinnamenu-metro",
+    "cinnamon-version": [
+        "4.0",
+        "4.2",
+        "4.4",
+        "4.6",
+        "4.8",
+        "5.0",
+        "5.2",
+        "5.4",
+        "5.6",
+        "5.8",
+        "6.0"
+    ],
+    "author": "cpxcristian (Original Author: fredcw)"
+}

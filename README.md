@@ -1,5 +1,9 @@
 # Cinnamenu-metro
 
+## ⚠️ NOTICE:
+- This version `main` have some issues with multiple monitors, when you have the menu in both monitors, the menu doesn't open in the monitor you press "super key".
+- Stable version is in the `stable` branch which is taken straight from [cinnamon-spices](https://cinnamon-spices.linuxmint.com/applets/view/322)
+
 ## 🌟 Features
 - Metro style applet
 - App groups

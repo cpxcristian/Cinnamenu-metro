@@ -13,7 +13,7 @@ const Main = imports.ui.main;
 
 // l10n
 const Gettext = imports.gettext;
-const UUID = 'Cinnamenu@json';
+const UUID = 'Cinnamenu-metro@json';
 
 function _(str) {
   let cinnamonTranslation = Gettext.gettext(str);

@@ -8,14 +8,14 @@ const Main = imports.ui.main;
 const ByteArray = imports.byteArray;
 const Cinnamon = imports.gi.Cinnamon;
 const {addTween} = imports.ui.tweener;
-Gettext.bindtextdomain('Cinnamenu@json', GLib.get_home_dir() + '/.local/share/locale');
+Gettext.bindtextdomain('Cinnamenu-metro@json', GLib.get_home_dir() + '/.local/share/locale');
 
 function _(str) {
     let cinnamonTranslation = Gettext.gettext(str);
     if (cinnamonTranslation !== str) {
         return cinnamonTranslation;
     }
-    return Gettext.dgettext('Cinnamenu@json', str);
+    return Gettext.dgettext('Cinnamenu-metro@json', str);
 }
 
 const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+|_|&|\\)|\S+?(\s|$|-|=|\+|_|&|\\)/g ).join('\n');

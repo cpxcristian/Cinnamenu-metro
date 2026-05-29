@@ -59,7 +59,7 @@ if (typeof require !== 'undefined') {
   searchThresholds = constants.searchThresholds;
   markdownProps = constants.markdownProps;
 } else {
-  const AppletDir = imports.ui.appletManager.applets['Cinnamenu@json'];
+  const AppletDir = imports.ui.appletManager.applets['Cinnamenu-metro@json'];
   let storeVersion = typeof Symbol === 'undefined' ? 'store_mozjs24' : 'store';
   store = AppletDir[storeVersion];
   fuzzy = AppletDir.fuzzy.fuzzy;

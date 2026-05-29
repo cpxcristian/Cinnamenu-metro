@@ -1,11 +1,11 @@
-# Swedish translation for Cinnamenu@json.
+# Swedish translation for Cinnamenu-metro@json.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017-2023.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Cinnamenu@json\n"
+"Project-Id-Version: Cinnamenu-metro@json\n"
 "Report-Msgid-Bugs-To: https://github.com/linuxmint/cinnamon-spices-applets/"
 "issues\n"
 "POT-Creation-Date: 2025-11-30 00:16-0500\n"

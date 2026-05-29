@@ -10,7 +10,7 @@
 
 ## 🚀 How to Install
 
-1. Extract the folder `Cinnamenu@json` into your local applets directory:
+1. Extract the folder `Cinnamenu-metro@json` into your local applets directory:
    ```bash
    ~/.local/share/cinnamon/applets/
    ```

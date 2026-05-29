@@ -6,7 +6,7 @@ function _(str) {
   if (cinnamonTranslation !== str) {
     return cinnamonTranslation;
   }
-  return Gettext.dgettext('Cinnamenu@json', str);
+  return Gettext.dgettext('Cinnamenu-metro@json', str);
 }
 
 const REMEMBER_RECENT_KEY = 'remember-recent-files';

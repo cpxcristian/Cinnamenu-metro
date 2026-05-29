@@ -1,10 +1,10 @@
 #!/bin/bash
 
-LOCAL_METADATA="${XDG_DATA_HOME:-$HOME/.local/share}/cinnamon/applets/Cinnamenu@json/metadata.json"
+LOCAL_METADATA="${XDG_DATA_HOME:-$HOME/.local/share}/cinnamon/applets/Cinnamenu-metro@json/metadata.json"
 GITHUB_METADATA="https://raw.githubusercontent.com/fredcw/Cinnamenu/refs/heads/main/Cinnamenu%40json/metadata.json"
 DOWNLOAD_URL="https://github.com/fredcw/Cinnamenu/archive/refs/heads/main.zip"
 TEMP_DIR="/tmp/cinnamenu_update"
-TARGET_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/cinnamon/applets/Cinnamenu@json"
+TARGET_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/cinnamon/applets/Cinnamenu-metro@json"
 
 # Extract version number from metadata.json
 extract_version() {
@@ -71,12 +71,12 @@ unzip -q "$TEMP_DIR/cinnamenu.zip" -d "$TEMP_DIR"
 # Copy the files
 echo "Installing..."
 rm -rf "$TARGET_DIR"
-mv "$TEMP_DIR/Cinnamenu-main/Cinnamenu@json" "$TARGET_DIR"
+mv "$TEMP_DIR/Cinnamenu-main/Cinnamenu-metro@json" "$TARGET_DIR"
 
 # Cleanup
 rm -rf "$TEMP_DIR" "$REMOTE_METADATA"
 
 # Reload applet
-dbus-send --session --dest=org.Cinnamon.LookingGlass --type=method_call /org/Cinnamon/LookingGlass org.Cinnamon.LookingGlass.ReloadExtension string:Cinnamenu@json string:'APPLET'
+dbus-send --session --dest=org.Cinnamon.LookingGlass --type=method_call /org/Cinnamon/LookingGlass org.Cinnamon.LookingGlass.ReloadExtension string:Cinnamenu-metro@json string:'APPLET'
 
 echo "Finished!"

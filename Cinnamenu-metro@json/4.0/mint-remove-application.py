@@ -13,7 +13,7 @@ from gi.repository import Gtk
 import aptkit.simpleclient
 
 # i18n
-gettext.install("Cinnamenu@json", os.environ['HOME'] + "/.local/share/locale")
+gettext.install("Cinnamenu-metro@json", os.environ['HOME'] + "/.local/share/locale")
 
 class MintRemoveWindow:
 

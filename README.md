@@ -3,6 +3,8 @@
 ## 🌟 Features
 - Metro style applet
 - App groups
+- App group priority
+- Added context menu "Properties" and "Open Desktop File".
 
 ## 📸 Preview
 ![Menu](docs/menu.png)
@@ -43,7 +45,6 @@ Instead of forcing you to manually manage a complex JSON file every time a new a
 ---
 
 ## ⚠️ Known Limitations
-- Currently the shortcut "ctrl+d" to open `.desktop` file does not work inside groups, only if you use the search bar to find the app and then press "ctrl+d".
 - Groups are fixed to a maximum of 2 groups per row.
 
 

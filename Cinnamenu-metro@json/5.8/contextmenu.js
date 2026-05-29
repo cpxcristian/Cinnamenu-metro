@@ -309,6 +309,18 @@ class ContextMenu {
                         () => { spawnCommandLine("/usr/bin/pamac-manager --details-id=" + app.id);
                                 this.appThis.menu.close(); } ));
         }
+
+        //properties
+        addMenuItem(new ContextMenuItem(this.appThis, _('Properties'), 'document-properties', () => {
+            spawnCommandLine("/usr/bin/cinnamon-desktop-editor -mlauncher -o" + app.desktop_file_path);
+            this.appThis.menu.close();
+        }));
+
+        //open desktop file
+        addMenuItem(new ContextMenuItem(this.appThis, _('Open Desktop File'), 'text-x-generic', () => {
+            spawnCommandLine("xdg-open " + app.desktop_file_path);
+            this.appThis.menu.close();
+        }));
     }
 
     _populateContextMenu_files(app) {

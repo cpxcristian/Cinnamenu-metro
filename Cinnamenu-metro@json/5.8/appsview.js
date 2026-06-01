@@ -560,6 +560,12 @@ class AppsView {
         this.globalGroupRow = 0;
         let groupCol = 0;
 
+        let cattegoryColumns = 2;
+        if (Object.keys(this.categoryList).length == 1) {
+            cattegoryColumns = 1;
+        }
+        const maxColumns = Math.max(2, Math.floor(this.getGridValues().columns / cattegoryColumns));
+
         Object.keys(this.categoryList).forEach(group => {
             let categoryLayout = new St.BoxLayout({ vertical: true, style_class: 'menu-group' });
 
@@ -574,8 +580,6 @@ class AppsView {
 
             let localCol = 0;
             let localRow = 0;
-
-            const maxColumns = Math.max(2, Math.floor(this.getGridValues().columns / 2));
 
             this.categoryList[group].forEach(app => {
                 let appButton = this.buttonStore.find(button => button.app === app);

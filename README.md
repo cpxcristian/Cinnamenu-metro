@@ -38,16 +38,15 @@ Instead of forcing you to manually manage a complex JSON file every time a new a
    ![added-to-favorites](docs/added-to-favorites.png).
 
 4. **Edit the Launcher:**
-   4.1 Right click on the menu applet and select "Open Desktop File".\
+   4.1 Right click on the application and select "Open Desktop File".\
      ![open-desktop-file](docs/open-desktop-file.png).\
    4.2 Add group name and priority to the .desktop file.\
      ![add-group-name](docs/add-group-name.png).
     ```ini
     [Desktop Entry]
-   Name=Minecraft: Java Edition
-   CinnamenuCategory=Games
-   CinnamenuPriority=20
-   ```
+    CinnamenuCategory=Games
+    CinnamenuPriority=20
+    ```
    4.3 Automatically the app will be added to the group you specified.
      ![added-to-group](docs/added-to-group.png).
 

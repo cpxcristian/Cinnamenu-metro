@@ -31,24 +31,24 @@ Instead of forcing you to manually manage a complex JSON file every time a new a
 
 2. **Set application as favorite.**\
    Right click on the application and select "Add to Favorites".
-   ![add-to-favorites](docs/add-to-favorites.png).
+   ![add-to-favorites](docs/add-to-favorites.png)
 
 3. **Go to favorites section**\
    You'll find your application in it.
-   ![added-to-favorites](docs/added-to-favorites.png).
+   ![added-to-favorites](docs/added-to-favorites.png)
 
 4. **Edit the Launcher:**
    4.1 Right click on the application and select "Open Desktop File".\
      ![open-desktop-file](docs/open-desktop-file.png).\
    4.2 Add group name and priority to the .desktop file.\
-     ![add-group-name](docs/add-group-name.png).
+     ![add-group-name](docs/add-group-name.png)
     ```ini
     [Desktop Entry]
     CinnamenuCategory=Games
     CinnamenuPriority=20
     ```
    4.3 Automatically the app will be added to the group you specified.
-     ![added-to-group](docs/added-to-group.png).
+     ![added-to-group](docs/added-to-group.png)
 
 5. **💡 Pro Tip (Avoid losing your groups):**  
    To prevent system updates from overwriting your custom groups in `/usr/share/applications/`, copy your modified `.desktop` files to your user space:

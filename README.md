@@ -25,17 +25,33 @@
 
 Instead of forcing you to manually manage a complex JSON file every time a new app is installed, this applet reads your groups natively from your application launchers.
 
-1. **Edit the Launcher:**  
-   Open your desired `.desktop` file and add the `CinnamenuCategory` field inside the `[Desktop Entry]` section. The value will be the exact name of the group.
-   Additionally you can add `CinnamenuPriority` field to specify the order of the apps in the group. The lower the number, the higher the priority. If not specified, the app will be placed at the end of the group.:
-   ```ini
-   [Desktop Entry]
-   Name=Antigravity
-   CinnamenuCategory=Work
-   CinnamenuPriority=1
-   ```
+1. **Set favorites as default category.**\
+   To emulate the behaviour of metro menu, we'll set favorite apps as the default category to display when the menu is opened.
+   ![default-category](docs/set-default-category.png)
 
-2. **💡 Pro Tip (Avoid losing your groups):**  
+2. **Set application as favorite.**\
+   Right click on the application and select "Add to Favorites".
+   ![add-to-favorites](docs/add-to-favorites.png).
+
+3. **Go to favorites section**\
+   You'll find your application in it.
+   ![added-to-favorites](docs/added-to-favorites.png).
+
+4. **Edit the Launcher:**
+   4.1 Right click on the menu applet and select "Open Desktop File".\
+     ![open-desktop-file](docs/open-desktop-file.png).\
+   4.2 Add group name and priority to the .desktop file.\
+     ![add-group-name](docs/add-group-name.png).
+    ```ini
+    [Desktop Entry]
+   Name=Minecraft: Java Edition
+   CinnamenuCategory=Games
+   CinnamenuPriority=20
+   ```
+   4.3 Automatically the app will be added to the group you specified.
+     ![added-to-group](docs/added-to-group.png).
+
+5. **💡 Pro Tip (Avoid losing your groups):**  
    To prevent system updates from overwriting your custom groups in `/usr/share/applications/`, copy your modified `.desktop` files to your user space:
    ```bash
    ~/.local/share/applications/
